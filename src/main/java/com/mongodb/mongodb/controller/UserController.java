@@ -9,6 +9,7 @@ import com.mongodb.mongodb.repository.UserRepository;
 import com.mongodb.mongodb.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.StreamingHttpOutputMessage.Body;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +59,14 @@ public class UserController {
     Map <String,Object> updateUser(@RequestBody User body){
         return userService.updateUser(body);
     }
+
+    @GetMapping("/page")
+    public ResponseEntity<Map<String ,Object>> getAllUsers(
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size )
+    { return userService.getAllUsername(search,page,size); }
+
 
 
 }
