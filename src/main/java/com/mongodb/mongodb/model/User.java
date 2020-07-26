@@ -1,5 +1,6 @@
 package com.mongodb.mongodb.model;
 
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,20 +9,24 @@ public class User {
     
     @Id
     private String id;
-    private String username,password,role,active,name,email;
+    private String username,password,role,name,email;
+    private Boolean active;
+    private DetailUser detailUser;
+    
 
 
     public User() {
     }
 
-    public User(String id, String username, String password, String role, String active, String name, String email) {
+    public User(String id, String username, String password, String role, String name, String email, DetailUser detailUser, Boolean active) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
-        this.active = active;
         this.name = name;
         this.email = email;
+        this.detailUser = detailUser;
+        this.active = active;
     }
 
     public String getId() {
@@ -56,14 +61,6 @@ public class User {
         this.role = role;
     }
 
-    public String getActive() {
-        return this.active;
-    }
-
-    public void setActive(String active) {
-        this.active = active;
-    }
-
     public String getName() {
         return this.name;
     }
@@ -78,6 +75,26 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public DetailUser getDetailUser() {
+        return this.detailUser;
+    }
+
+    public void setDetailUser(DetailUser detailUser) {
+        this.detailUser = detailUser;
+    }
+
+    public Boolean isActive() {
+        return this.active;
+    }
+
+    public Boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public User id(String id) {
@@ -100,11 +117,6 @@ public class User {
         return this;
     }
 
-    public User active(String active) {
-        this.active = active;
-        return this;
-    }
-
     public User name(String name) {
         this.name = name;
         return this;
@@ -115,6 +127,15 @@ public class User {
         return this;
     }
 
+    public User detailUser(DetailUser detailUser) {
+        this.detailUser = detailUser;
+        return this;
+    }
+
+    public User active(Boolean active) {
+        this.active = active;
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -123,9 +144,10 @@ public class User {
             ", username='" + getUsername() + "'" +
             ", password='" + getPassword() + "'" +
             ", role='" + getRole() + "'" +
-            ", active='" + getActive() + "'" +
             ", name='" + getName() + "'" +
             ", email='" + getEmail() + "'" +
+            ", detailUser='" + getDetailUser() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 

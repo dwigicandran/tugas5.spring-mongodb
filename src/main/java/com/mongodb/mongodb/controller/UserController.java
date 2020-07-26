@@ -1,6 +1,5 @@
 package com.mongodb.mongodb.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import com.mongodb.mongodb.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.StreamingHttpOutputMessage.Body;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,15 +36,7 @@ public class UserController {
 
     @PostMapping("")
     public Map<String, Object> saveUser(@RequestBody User body) {
-        Map<String,Object> result = new HashMap<>();
-        if(userService.saveUser(body)){
-            result.put("success", true);
-            result.put("message", "user berhasil ditambahkan");
-        }else{
-            result.put("success", false);
-            result.put("message", "user gagal ditambahkan");
-        }
-        return result;
+        return userService.saveUser(body);
     }
 
     @DeleteMapping("")
@@ -64,7 +54,7 @@ public class UserController {
     public ResponseEntity<Map<String ,Object>> getAllUsers(
             @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size )
+            @RequestParam(defaultValue = "3") int size)
     { return userService.getAllUsername(search,page,size); }
 
 
