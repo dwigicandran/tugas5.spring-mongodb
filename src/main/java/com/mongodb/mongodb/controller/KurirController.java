@@ -27,13 +27,13 @@ public class KurirController {
 
     @GetMapping("")
     public List<Kurir> getAllKurir(){
-        return repo.findAll();
+        return service.getAllKurir();
 
     }
 
     @PostMapping("")
-    public Map<String, Object> saveKurir(@RequestBody Kurir body) {
-        return service.saveKurir(body);
+    public Map<String, Object> saveKurir(@RequestBody Kurir body,String id) {
+        return service.saveKurir(body,id);
     }
     
     @DeleteMapping("")
@@ -43,8 +43,13 @@ public class KurirController {
     }
 
     @PutMapping("")
-    Map <String,Object> updateKurir(@RequestBody Kurir body){
-        return service.updateKurir(body);
+    Map <String,Object> updateKurir(@RequestBody Kurir body,String id){
+        return service.updateKurir(body,id);
+    }
+
+    @GetMapping("/layananid")
+    public Kurir getDataByLayanan(String id) {
+        return service.getByLayananId(id);
     }
     
 }

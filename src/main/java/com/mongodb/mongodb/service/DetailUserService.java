@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.mongodb.mongodb.model.DetailUser;
 import com.mongodb.mongodb.model.User;
-import com.mongodb.mongodb.repository.DetailUserRepository;
 import com.mongodb.mongodb.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +69,7 @@ public class DetailUserService {
             //update data dengan hilangkan detailUser
             update.unset("detailUser");
             mongotemp.updateMulti(query, update, User.class);
-            
+
             result.put("success", true);
             result.put("message", "berhasil dihapus");
         } catch (final Exception e) {

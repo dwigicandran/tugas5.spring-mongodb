@@ -1,6 +1,5 @@
 package com.mongodb.mongodb.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,18 +9,18 @@ public class LayananKurir {
     private String id;
     private String nama,estimasi;
     private int harga;
-    private ObjectId id_kurir;
+    private Kurir kurir;
 
 
     public LayananKurir() {
     }
 
-    public LayananKurir(String id, String nama, String estimasi, int harga, ObjectId id_kurir) {
+    public LayananKurir(String id, String nama, String estimasi, int harga, Kurir kurir) {
         this.id = id;
         this.nama = nama;
         this.estimasi = estimasi;
         this.harga = harga;
-        this.id_kurir = id_kurir;
+        this.kurir = kurir;
     }
 
     public String getId() {
@@ -56,12 +55,12 @@ public class LayananKurir {
         this.harga = harga;
     }
 
-    public ObjectId getId_kurir() {
-        return this.id_kurir;
+    public Kurir getKurir() {
+        return this.kurir;
     }
 
-    public void setId_kurir(ObjectId id_kurir) {
-        this.id_kurir = id_kurir;
+    public void setKurir(Kurir kurir) {
+        this.kurir = kurir;
     }
 
     public LayananKurir id(String id) {
@@ -84,12 +83,13 @@ public class LayananKurir {
         return this;
     }
 
-    public LayananKurir id_kurir(ObjectId id_kurir) {
-        this.id_kurir = id_kurir;
+    public LayananKurir kurir(Kurir kurir) {
+        this.kurir = kurir;
         return this;
     }
 
    
+
     @Override
     public String toString() {
         return "{" +
@@ -97,7 +97,7 @@ public class LayananKurir {
             ", nama='" + getNama() + "'" +
             ", estimasi='" + getEstimasi() + "'" +
             ", harga='" + getHarga() + "'" +
-            ", id_kurir='" + getId_kurir() + "'" +
+            ", kurir='" + getKurir() + "'" +
             "}";
     }
 

@@ -51,7 +51,7 @@ public class UserService {
         return resultMap;
 	}
 	public Map<String, Object> deleteUser(String id) {
-		Optional userResult = userRepository.findById(id);
+		Optional<User> userResult = userRepository.findById(id);
         Map<String, Object> resultMap = new HashMap<>();
         if (userResult.isPresent()) {
             try {
@@ -69,7 +69,7 @@ public class UserService {
         return resultMap;
 	}
 	public Map<String, Object> updateUser(User body) {
-        Optional userResult = userRepository.findById(body.getId());
+        Optional<User> userResult = userRepository.findById(body.getId());
         Map<String, Object> resultMap = new HashMap<>();
         if (userResult.isPresent()) {
             try {

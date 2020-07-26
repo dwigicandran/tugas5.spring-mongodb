@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.mongodb.mongodb.model.LayananKurir;
+import com.mongodb.mongodb.repository.KurirRepository;
 import com.mongodb.mongodb.repository.LayananKurirRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,29 +16,44 @@ public class LayananKurirService {
     
     @Autowired
     LayananKurirRepository repo;
+    @Autowired
+    KurirRepository kurirRepo;
+
 
 	public Map<String, Object> saveLayananKurir(LayananKurir body) {
-		Map<String, Object> result = new HashMap<>();
-        try {
-            repo.save(body);
-            result.put("success", true);
-            result.put("message", "LayananKurir successfuly added");
-        } catch (Exception e) {
-            result.put("success", true);
-            result.put("message", "LayananKurir failed added");
+		Optional<LayananKurir> layanan = repo.findByNama(body.getNama());
+        Map<String, Object> resultMap = new HashMap<>();
+        if (layanan.isPresent()) {
+            resultMap.put("success", false);
+            resultMap.put("message", "Layanan telah terdaftar");
+        } else {
+            try {
+                repo.save(body);
+                resultMap.put("success", true);
+                resultMap.put("message", "insert Layanan berhasil");
+            } catch (Exception e) {
+                resultMap.put("success", false);
+                resultMap.put("message", "insert Layanan gagal");
+            }
         }
-        return result;
+        return resultMap;
 	}
 
 	public Map<String, Object> deleteLayananKurir(String id) {
-		Map<String, Object> result = new HashMap<>();
-        try {
-            repo.deleteById(id);
-            result.put("success", true);
-            result.put("message", "Succesfuly deleted");
-        } catch (final Exception e) {
+        Optional<LayananKurir> layanan = repo.findById(id);
+        Map<String, Object> result = new HashMap<>();
+        if (layanan.isPresent()) {
+            try {
+                repo.deleteById(id);
+                result.put("success", true);
+                result.put("message", "Succesfuly deleted");
+            } catch (final Exception e) {
+                result.put("success", false);
+                result.put("message", "Failed deleted");
+            }
+        }else {
             result.put("success", false);
-            result.put("message", "Failed deleted");
+            result.put("message", "no data");
         }
         return result;
 	}
@@ -45,7 +61,7 @@ public class LayananKurirService {
 	public Map<String, Object> updateLayananKurir(LayananKurir body) {
 		Optional<LayananKurir> result = repo.findById(body.getId());
          Map<String, Object> resultMap = new HashMap<>();
-        if (result != null) {
+        if (result.isPresent()) {
             try {
                 repo.save(body);
                 resultMap.put("success", true);
@@ -56,7 +72,7 @@ public class LayananKurirService {
             }
         } else {
             resultMap.put("success", false);
-            resultMap.put("message", "null");
+            resultMap.put("message", "no data");
         }
         return resultMap;
 	}
