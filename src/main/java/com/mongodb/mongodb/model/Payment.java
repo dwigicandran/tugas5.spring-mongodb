@@ -10,13 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @ToString
 @Document
-public class Item {
+public class Payment {
     @Id
     private String id;
-
-    private String nama;
-    private String description;
-    private int stock,harga,terjual,berat;
-
-
+    private  String nama,code,jenis;
 }

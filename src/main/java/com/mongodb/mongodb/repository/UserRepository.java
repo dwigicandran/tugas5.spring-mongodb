@@ -15,6 +15,5 @@ public interface UserRepository extends MongoRepository <User,String>{
 	Page<User> findByUsernameContaining(String search, Pageable pageable);
 
 	Optional<User> findByUsername(String username);
-
-    
+	User findByUsername_Containing(String username);
 }

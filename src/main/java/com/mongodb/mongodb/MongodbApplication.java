@@ -10,4 +10,6 @@ public class MongodbApplication {
 		SpringApplication.run(MongodbApplication.class, args);
 	}
 
+
+
 }

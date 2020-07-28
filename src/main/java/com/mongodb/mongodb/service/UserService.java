@@ -1,10 +1,6 @@
 package com.mongodb.mongodb.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.DetailUserRepository;
@@ -25,11 +21,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    DetailUserRepository detailRepository;
-
-    @Autowired
-    MongoTemplate mongoTemplate;
 
 
 	public Map<String, Object> saveUser(User body) {
@@ -113,9 +104,5 @@ public class UserService {
         }
 	}
 
-	
 
-
-
-    
 }

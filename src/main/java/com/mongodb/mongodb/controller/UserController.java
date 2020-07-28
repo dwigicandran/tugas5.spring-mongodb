@@ -1,8 +1,8 @@
 package com.mongodb.mongodb.controller;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.mongodb.mongodb.model.Login;
 import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.UserRepository;
 import com.mongodb.mongodb.service.UserService;
@@ -26,6 +26,7 @@ public class UserController {
     UserRepository userRepository;    
     @Autowired
     UserService userService;
+
 
 
     @GetMapping("")
@@ -56,6 +57,8 @@ public class UserController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size)
     { return userService.getAllUsername(search,page,size); }
+
+
 
 
 
