@@ -3,16 +3,15 @@ package com.mongodb.mongodb.service;
 import java.util.*;
 
 import com.mongodb.mongodb.model.User;
-import com.mongodb.mongodb.repository.DetailUserRepository;
 import com.mongodb.mongodb.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,12 +19,18 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
 
 	public Map<String, Object> saveUser(User body) {
 		Optional<User> userResult = userRepository.findByUsername(body.getUsername());
         Map<String, Object> resultMap = new HashMap<>();
+
+        String hashedPassword = passwordEncoder.encode(body.getPassword());
+        body.setPassword(hashedPassword);
+
         if (userResult.isPresent()) {
             resultMap.put("success", false);
             resultMap.put("message", "user telah terdaftar");
@@ -62,6 +67,10 @@ public class UserService {
 	public Map<String, Object> updateUser(User body) {
         Optional<User> userResult = userRepository.findById(body.getId());
         Map<String, Object> resultMap = new HashMap<>();
+
+        String hashedPassword = passwordEncoder.encode(body.getPassword());
+        body.setPassword(hashedPassword);
+
         if (userResult.isPresent()) {
             try {
                 userRepository.save(body);
@@ -103,6 +112,4 @@ public class UserService {
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
 	}
-
-
 }
