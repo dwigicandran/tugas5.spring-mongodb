@@ -2,9 +2,12 @@ package com.mongodb.mongodb.service;
 
 import java.util.*;
 
+import com.mongodb.mongodb.model.Login;
 import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.UserRepository;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -112,4 +115,32 @@ public class UserService {
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
 	}
+
+    public Map<String, Object> loginUser(Login body) {
+        Optional<User> result = userRepository.findByUsername(body.getUsername());
+        Map<String,Object> map = new HashMap<>();
+        if (result != null){
+            //tambahin untuk encoder password
+            boolean isMatch = passwordEncoder.matches(body.getPassword(),result.get().getPassword());
+            //jika cocok
+            if (isMatch){
+                String token = Jwts.builder()
+                        .setSubject(body.getUsername())
+                        .claim("role",result.get().getRole())
+                        .signWith(SignatureAlgorithm.HS256, "secret")
+                        .setIssuedAt(new Date(System.currentTimeMillis()))
+                        .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+                        .compact();
+                map.put("success",true);
+                map.put("record", result);
+                map.put("token", token);
+            } else{
+                map.put("success", false);
+            }
+        }else {
+            System.out.println("user tidak ada");
+            map.put("success", false);
+        }
+        return map;
+    }
 }

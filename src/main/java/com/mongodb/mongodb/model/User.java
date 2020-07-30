@@ -4,6 +4,7 @@ package com.mongodb.mongodb.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -25,7 +26,5 @@ public class User {
     private Boolean active;
     private DetailUser detailUser;
 
-    public User(String subject, String s, List<SimpleGrantedAuthority> authorities) {
 
-    }
 }

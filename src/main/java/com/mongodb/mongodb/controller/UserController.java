@@ -2,6 +2,7 @@ package com.mongodb.mongodb.controller;
 
 import java.util.*;
 
+import com.mongodb.mongodb.model.Login;
 import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.UserRepository;
 import com.mongodb.mongodb.service.UserService;
@@ -25,6 +26,7 @@ public class UserController {
     UserRepository userRepository;    
     @Autowired
     UserService userService;
+
 
 
 
@@ -56,5 +58,10 @@ public class UserController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size)
     { return userService.getAllUsername(search,page,size); }
+
+    @PostMapping("/login")
+    public Map<String, Object> loginUser(@RequestBody Login body){
+        return userService.loginUser(body);
+    }
 
 }
