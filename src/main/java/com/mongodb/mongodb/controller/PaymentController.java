@@ -1,8 +1,6 @@
 package com.mongodb.mongodb.controller;
 
-import com.mongodb.mongodb.model.DetailUser;
 import com.mongodb.mongodb.model.Payment;
-import com.mongodb.mongodb.model.Transaksi;
 import com.mongodb.mongodb.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +36,7 @@ public class PaymentController {
         return service.updatePayment(body,id);
     }
 
-    @GetMapping("/transaksiid")
+    @GetMapping("/transaksiId")
     public Payment getDataByTransaksiId(String id) {
         return service.getByTransaksiId(id);
     }

@@ -1,9 +1,6 @@
 package com.mongodb.mongodb.service;
 
-import com.mongodb.mongodb.model.DetailUser;
-import com.mongodb.mongodb.model.Payment;
-import com.mongodb.mongodb.model.Transaksi;
-import com.mongodb.mongodb.model.User;
+import com.mongodb.mongodb.model.*;
 import com.mongodb.mongodb.repository.TransaksiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -65,7 +62,7 @@ public class PaymentService {
             //objek update query update
             Update update = new Update();
             //update data dengan hilangkan detailUser
-            update.unset("detailUser");
+            update.unset("payment");
             mongoTemplate.updateMulti(query, update, Transaksi.class);
 
             result.put("success", true);

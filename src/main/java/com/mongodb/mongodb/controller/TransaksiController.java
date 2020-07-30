@@ -32,7 +32,7 @@ public class TransaksiController {
     @DeleteMapping("")
         //id dr param postman
     Map<String,Object>deleteTransaksi(@RequestParam String id){
-        return service.deleteUser(id);
+        return service.deleteTransaksi(id);
     }
 
     @PutMapping("")

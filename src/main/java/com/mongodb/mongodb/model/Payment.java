@@ -3,6 +3,7 @@ package com.mongodb.mongodb.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Getter
 @Setter
@@ -11,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 @Document
 public class Payment {
-    @Id
+    @MongoId
     private String id;
     private  String nama,code,jenis;
 }

@@ -1,7 +1,6 @@
 package com.mongodb.mongodb.service;
 
 import com.mongodb.mongodb.model.Transaksi;
-import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.TransaksiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class TransaksiService {
             return resultMap;
     }
 
-    public Map<String, Object> deleteUser(String id) {
+    public Map<String, Object> deleteTransaksi(String id) {
         Optional<Transaksi> result = repo.findById(id);
         Map<String ,Object> resultMap = new HashMap<>();
         try {
