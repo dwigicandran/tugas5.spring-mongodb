@@ -2,13 +2,13 @@ package com.mongodb.mongodb.controller;
 
 import java.util.*;
 
-import com.mongodb.mongodb.model.Login;
 import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.UserRepository;
 import com.mongodb.mongodb.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,18 +26,18 @@ public class UserController {
     UserRepository userRepository;    
     @Autowired
     UserService userService;
-
-
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public List<User> getAllUser(){
         return userRepository.findAll();
-
     }
 
     @PostMapping("")
     public Map<String, Object> saveUser(@RequestBody User body) {
+        String password = passwordEncoder.encode(body.getPassword());
+        body.setPassword(password);
         return userService.saveUser(body);
     }
 
@@ -49,6 +49,8 @@ public class UserController {
 
     @PutMapping("")
     Map <String,Object> updateUser(@RequestBody User body){
+        String password = passwordEncoder.encode(body.getPassword());
+        body.setPassword(password);
         return userService.updateUser(body);
     }
 
@@ -59,9 +61,6 @@ public class UserController {
             @RequestParam(defaultValue = "3") int size)
     { return userService.getAllUsername(search,page,size); }
 
-    @PostMapping("/login")
-    public Map<String, Object> loginUser(@RequestBody Login body){
-        return userService.loginUser(body);
-    }
+
 
 }

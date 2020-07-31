@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JWTFilter extends GenericFilterBean {
-
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String AUTHORITIES_KEY = "role";
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
+            throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         String authHeader = request.getHeader(AUTHORIZATION_HEADER);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -32,25 +32,25 @@ public class JWTFilter extends GenericFilterBean {
         } else {
             try {
                 String token = authHeader.substring(7);
-                Claims claims = Jwts.parser().setSigningKey("secret").parseClaimsJws(token).getBody();
-//                System.out.println("token claims : " + claims);
+                Claims claims = Jwts.parser().setSigningKey("chand").parseClaimsJws(token).getBody();
+                 System.out.println("token claims : " + claims);
                 request.setAttribute("claims", claims);
                 SecurityContextHolder.getContext().setAuthentication(getAuthentication(claims));
                 filterChain.doFilter(req, res);
             } catch (SignatureException e) {
-//                System.out.println("token : invalid");
+                 System.out.println("token : invalid");
                 ((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
             } catch (UnsupportedJwtException exception) {
-//                System.out.println("token : unsuported");
+                 System.out.println("token : unsuported");
                 ((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "token unsuported");
             } catch (MalformedJwtException exception) {
-//                System.out.println("token : invalid malformed");
+                 System.out.println("token : invalid malformed");
                 ((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "invalid token");
             } catch (IllegalArgumentException exception) {
-//                System.out.println("token : ilegal");
+                 System.out.println("token : ilegal");
                 ((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, exception.getMessage());
             } catch (ExpiredJwtException e) {
-//                System.out.println("token : expired");
+                 System.out.println("token : expired");
                 ((HttpServletResponse) res).sendError(HttpServletResponse.SC_UNAUTHORIZED, "token expired");
             }
         }
@@ -58,15 +58,20 @@ public class JWTFilter extends GenericFilterBean {
 
     public Authentication getAuthentication(Claims claims) {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        System.out.println("claims : " + claims.get(AUTHORITIES_KEY));
+         System.out.println("claims : " + claims.get(AUTHORITIES_KEY));
         String roles = (String) claims.get(AUTHORITIES_KEY);
-        System.out.println("roles : " + roles);
 
-        authorities.add(new SimpleGrantedAuthority(roles));
-
+//        for (String role : roles) {
+            authorities.add(new SimpleGrantedAuthority(roles));
+//        }
 
         User principal = new User(claims.getSubject(), "", authorities);
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(principal, "", authorities);
+
+        System.out.println("principal : " + principal.toString());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                principal, "", authorities);
+        System.out.println("authentication : " + usernamePasswordAuthenticationToken.toString());
         return usernamePasswordAuthenticationToken;
     }
+
 }

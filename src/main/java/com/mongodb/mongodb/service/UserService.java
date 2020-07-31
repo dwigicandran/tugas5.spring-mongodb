@@ -2,19 +2,15 @@ package com.mongodb.mongodb.service;
 
 import java.util.*;
 
-import com.mongodb.mongodb.model.Login;
 import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.UserRepository;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,8 +18,6 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
 
 
@@ -31,8 +25,6 @@ public class UserService {
 		Optional<User> userResult = userRepository.findByUsername(body.getUsername());
         Map<String, Object> resultMap = new HashMap<>();
 
-        String hashedPassword = passwordEncoder.encode(body.getPassword());
-        body.setPassword(hashedPassword);
 
         if (userResult.isPresent()) {
             resultMap.put("success", false);
@@ -71,8 +63,6 @@ public class UserService {
         Optional<User> userResult = userRepository.findById(body.getId());
         Map<String, Object> resultMap = new HashMap<>();
 
-        String hashedPassword = passwordEncoder.encode(body.getPassword());
-        body.setPassword(hashedPassword);
 
         if (userResult.isPresent()) {
             try {
@@ -115,32 +105,4 @@ public class UserService {
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
 	}
-
-    public Map<String, Object> loginUser(Login body) {
-        Optional<User> result = userRepository.findByUsername(body.getUsername());
-        Map<String,Object> map = new HashMap<>();
-        if (result != null){
-            //tambahin untuk encoder password
-            boolean isMatch = passwordEncoder.matches(body.getPassword(),result.get().getPassword());
-            //jika cocok
-            if (isMatch){
-                String token = Jwts.builder()
-                        .setSubject(body.getUsername())
-                        .claim("role",result.get().getRole())
-                        .signWith(SignatureAlgorithm.HS256, "secret")
-                        .setIssuedAt(new Date(System.currentTimeMillis()))
-                        .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                        .compact();
-                map.put("success",true);
-                map.put("record", result);
-                map.put("token", token);
-            } else{
-                map.put("success", false);
-            }
-        }else {
-            System.out.println("user tidak ada");
-            map.put("success", false);
-        }
-        return map;
-    }
 }
