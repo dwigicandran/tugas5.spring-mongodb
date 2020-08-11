@@ -1,8 +1,6 @@
 package com.mongodb.mongodb.controller;
 
-import com.mongodb.mongodb.model.Payment;
 import com.mongodb.mongodb.model.Transaksi;
-import com.mongodb.mongodb.model.User;
 import com.mongodb.mongodb.repository.TransaksiRepository;
 import com.mongodb.mongodb.service.TransaksiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("transaksi")
 public class TransaksiController {

@@ -1,0 +1,280 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f0e97613410, pid=8156, tid=14370
+#
+# JRE version: Java(TM) SE Runtime Environment (14.0.1+7) (build 14.0.1+7)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (14.0.1+7, mixed mode, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# V  [libjvm.so+0xc6a410]  SymbolTable::lookup_shared(char const*, int, unsigned int)+0xe0
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P %E" (or dumping to /home/dika_dees/dev/mongodb/core.8156)
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=localhost:44615 -XX:+ShowCodeDetailsInExceptionMessages -Dfile.encoding=UTF-8 com.mongodb.mongodb.MongodbApplication
+
+Host: AMD A9-9420 RADEON R5, 5 COMPUTE CORES 2C+3G, 2 cores, 3G, Ubuntu 20.04.1 LTS
+Time: Wed Aug  5 16:09:13 2020 WIB elapsed time: 15892 seconds (0d 4h 24m 52s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f0e5c004800):  JavaThread "SpringContextShutdownHook" [_thread_in_vm, id=14370, stack(0x00007f0e38bb9000,0x00007f0e38cba000)]
+
+Stack: [0x00007f0e38bb9000,0x00007f0e38cba000],  sp=0x00007f0e38cb5518,  free space=1009k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xc6a410]  SymbolTable::lookup_shared(char const*, int, unsigned int)+0xe0
+V  [libjvm.so+0xc6a840]  SymbolTable::lookup_only(char const*, int, unsigned int&)+0xb0
+V  [libjvm.so+0x508983]  ClassFileParser::parse_constant_pool_entries(ClassFileStream const*, ConstantPool*, int, Thread*)+0x8c3
+V  [libjvm.so+0x5091e1]  ClassFileParser::parse_stream(ClassFileStream const*, Thread*) [clone .part.198]+0x231
+V  [libjvm.so+0x50c226]  ClassFileParser::ClassFileParser(ClassFileStream*, Symbol*, ClassLoaderData*, Handle, InstanceKlass const*, GrowableArray<Handle>*, ClassFileParser::Publicity, Thread*)+0x316
+V  [libjvm.so+0x97485b]  KlassFactory::create_from_stream(ClassFileStream*, Symbol*, ClassLoaderData*, Handle, InstanceKlass const*, GrowableArray<Handle>*, Thread*)+0x10b
+V  [libjvm.so+0xc7afe4]  SystemDictionary::resolve_from_stream(Symbol*, Handle, Handle, ClassFileStream*, Thread*)+0x154
+V  [libjvm.so+0x83d03c]  jvm_define_class_common(JNIEnv_*, char const*, _jobject*, signed char const*, int, _jobject*, char const*, Thread*)+0x1cc
+V  [libjvm.so+0x83d291]  JVM_DefineClassWithSource+0x61
+C  [libjava.so+0xd5b3]  Java_java_lang_ClassLoader_defineClass2+0xf3
+j  java.lang.ClassLoader.defineClass2(Ljava/lang/ClassLoader;Ljava/lang/String;Ljava/nio/ByteBuffer;IILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;+0 java.base@14.0.1
+j  java.lang.ClassLoader.defineClass(Ljava/lang/String;Ljava/nio/ByteBuffer;Ljava/security/ProtectionDomain;)Ljava/lang/Class;+93 java.base@14.0.1
+j  java.security.SecureClassLoader.defineClass(Ljava/lang/String;Ljava/nio/ByteBuffer;Ljava/security/CodeSource;)Ljava/lang/Class;+8 java.base@14.0.1
+j  jdk.internal.loader.BuiltinClassLoader.defineClass(Ljava/lang/String;Ljdk/internal/loader/BuiltinClassLoader$LoadedModule;)Ljava/lang/Class;+127 java.base@14.0.1
+j  jdk.internal.loader.BuiltinClassLoader.findClassInModuleOrNull(Ljdk/internal/loader/BuiltinClassLoader$LoadedModule;Ljava/lang/String;)Ljava/lang/Class;+9 java.base@14.0.1
+J 3164 c2 jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Ljava/lang/String;Z)Ljava/lang/Class; java.base@14.0.1 (143 bytes) @ 0x00007f0e80310de8 [0x00007f0e8030e500+0x00000000000028e8]
+j  jdk.internal.loader.BuiltinClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;+3 java.base@14.0.1
+J 493 c1 java.lang.ClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class; java.base@14.0.1 (7 bytes) @ 0x00007f0e78d4e464 [0x00007f0e78d4e320+0x0000000000000144]
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x78e54b]  JavaCalls::call_helper(JavaValue*, methodHandle const&, JavaCallArguments*, Thread*)+0x2fb
+V  [libjvm.so+0x78e829]  JavaCalls::call_virtual(JavaValue*, Klass*, Symbol*, Symbol*, JavaCallArguments*, Thread*)+0x179
+V  [libjvm.so+0x78e9b3]  JavaCalls::call_virtual(JavaValue*, Handle, Klass*, Symbol*, Symbol*, Handle, Thread*)+0xa3
+V  [libjvm.so+0xc7cc32]  SystemDictionary::load_instance_class(Symbol*, Handle, Thread*)+0x182
+V  [libjvm.so+0xc7bbba]  SystemDictionary::resolve_instance_class_or_null(Symbol*, Handle, Handle, Thread*)+0x9ba
+V  [libjvm.so+0xc7ddb0]  SystemDictionary::resolve_or_fail(Symbol*, Handle, Handle, bool, Thread*)+0x50
+V  [libjvm.so+0x578d60]  ConstantPool::klass_at_impl(constantPoolHandle const&, int, bool, Thread*)+0xe0
+V  [libjvm.so+0x7879ea]  InterpreterRuntime::_new(JavaThread*, ConstantPool*, int)+0x6a
+j  java.sql.DriverManager.ensureDriversInitialized()V+22 java.sql@14.0.1
+j  java.sql.DriverManager.getDrivers()Ljava/util/Enumeration;+0 java.sql@14.0.1
+j  org.apache.catalina.loader.JdbcLeakPrevention.clearJdbcDriverRegistrations()Ljava/util/List;+16
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x78e54b]  JavaCalls::call_helper(JavaValue*, methodHandle const&, JavaCallArguments*, Thread*)+0x2fb
+V  [libjvm.so+0xbb153b]  invoke(InstanceKlass*, methodHandle const&, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*) [clone .constprop.117]+0x85b
+V  [libjvm.so+0xbb200d]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0xfd
+V  [libjvm.so+0x83ba03]  JVM_InvokeMethod+0xf3
+J 2998  jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (0 bytes) @ 0x00007f0e802e90a0 [0x00007f0e802e8fa0+0x0000000000000100]
+J 2997 c1 jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (104 bytes) @ 0x00007f0e793167b4 [0x00007f0e793163a0+0x0000000000000414]
+J 2113 c1 jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (10 bytes) @ 0x00007f0e790bdeec [0x00007f0e790bdda0+0x000000000000014c]
+J 2026 c1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (65 bytes) @ 0x00007f0e79077b84 [0x00007f0e79077800+0x0000000000000384]
+j  org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc()V+142
+j  org.apache.catalina.loader.WebappClassLoaderBase.clearReferences()V+67
+j  org.apache.catalina.loader.WebappClassLoaderBase.stop()V+8
+j  org.apache.catalina.loader.WebappLoader.stopInternal()V+63
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.StandardContext.stopInternal()V+363
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Void;+19
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Object;+1
+j  java.util.concurrent.FutureTask.run()V+39 java.base@14.0.1
+j  org.apache.tomcat.util.threads.InlineExecutorService.execute(Ljava/lang/Runnable;)V+38
+j  java.util.concurrent.AbstractExecutorService.submit(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;+20 java.base@14.0.1
+j  org.apache.catalina.core.ContainerBase.stopInternal()V+123
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Void;+19
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Object;+1
+j  java.util.concurrent.FutureTask.run()V+39 java.base@14.0.1
+j  org.apache.tomcat.util.threads.InlineExecutorService.execute(Ljava/lang/Runnable;)V+38
+j  java.util.concurrent.AbstractExecutorService.submit(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;+20 java.base@14.0.1
+j  org.apache.catalina.core.ContainerBase.stopInternal()V+123
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.StandardService.stopInternal()V+126
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.StandardServer.stopInternal()V+82
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.startup.Tomcat.stop()V+9
+j  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stopTomcat()V+29
+j  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stop()V+32
+j  org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.stop()V+4
+j  org.springframework.context.SmartLifecycle.stop(Ljava/lang/Runnable;)V+1
+j  org.springframework.context.support.DefaultLifecycleProcessor.doStop(Ljava/util/Map;Ljava/lang/String;Ljava/util/concurrent/CountDownLatch;Ljava/util/Set;)V+174
+j  org.springframework.context.support.DefaultLifecycleProcessor.access$300(Lorg/springframework/context/support/DefaultLifecycleProcessor;Ljava/util/Map;Ljava/lang/String;Ljava/util/concurrent/CountDownLatch;Ljava/util/Set;)V+6
+j  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop()V+176
+j  org.springframework.context.support.DefaultLifecycleProcessor.stopBeans()V+100
+j  org.springframework.context.support.DefaultLifecycleProcessor.onClose()V+1
+j  org.springframework.context.support.AbstractApplicationContext.doClose()V+111
+j  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose()V+15
+j  org.springframework.context.support.AbstractApplicationContext$1.run()V+14
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x78e54b]  JavaCalls::call_helper(JavaValue*, methodHandle const&, JavaCallArguments*, Thread*)+0x2fb
+V  [libjvm.so+0x78e829]  JavaCalls::call_virtual(JavaValue*, Klass*, Symbol*, Symbol*, JavaCallArguments*, Thread*)+0x179
+V  [libjvm.so+0x78e8f1]  JavaCalls::call_virtual(JavaValue*, Handle, Klass*, Symbol*, Symbol*, Thread*)+0x81
+V  [libjvm.so+0x83370c]  thread_entry(JavaThread*, Thread*)+0x6c
+V  [libjvm.so+0xcc2cf2]  JavaThread::thread_main_inner()+0xe2
+V  [libjvm.so+0xcc750d]  Thread::call_run()+0x10d
+V  [libjvm.so+0xb24ba7]  thread_native_entry(Thread*)+0xe7
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.ClassLoader.defineClass2(Ljava/lang/ClassLoader;Ljava/lang/String;Ljava/nio/ByteBuffer;IILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;+0 java.base@14.0.1
+j  java.lang.ClassLoader.defineClass(Ljava/lang/String;Ljava/nio/ByteBuffer;Ljava/security/ProtectionDomain;)Ljava/lang/Class;+93 java.base@14.0.1
+j  java.security.SecureClassLoader.defineClass(Ljava/lang/String;Ljava/nio/ByteBuffer;Ljava/security/CodeSource;)Ljava/lang/Class;+8 java.base@14.0.1
+j  jdk.internal.loader.BuiltinClassLoader.defineClass(Ljava/lang/String;Ljdk/internal/loader/BuiltinClassLoader$LoadedModule;)Ljava/lang/Class;+127 java.base@14.0.1
+j  jdk.internal.loader.BuiltinClassLoader.findClassInModuleOrNull(Ljdk/internal/loader/BuiltinClassLoader$LoadedModule;Ljava/lang/String;)Ljava/lang/Class;+9 java.base@14.0.1
+J 3164 c2 jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Ljava/lang/String;Z)Ljava/lang/Class; java.base@14.0.1 (143 bytes) @ 0x00007f0e80310de8 [0x00007f0e8030e500+0x00000000000028e8]
+j  jdk.internal.loader.BuiltinClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;+3 java.base@14.0.1
+J 493 c1 java.lang.ClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class; java.base@14.0.1 (7 bytes) @ 0x00007f0e78d4e464 [0x00007f0e78d4e320+0x0000000000000144]
+v  ~StubRoutines::call_stub
+j  java.sql.DriverManager.ensureDriversInitialized()V+22 java.sql@14.0.1
+j  java.sql.DriverManager.getDrivers()Ljava/util/Enumeration;+0 java.sql@14.0.1
+j  org.apache.catalina.loader.JdbcLeakPrevention.clearJdbcDriverRegistrations()Ljava/util/List;+16
+v  ~StubRoutines::call_stub
+J 2998  jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (0 bytes) @ 0x00007f0e802e9027 [0x00007f0e802e8fa0+0x0000000000000087]
+J 2997 c1 jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (104 bytes) @ 0x00007f0e793167b4 [0x00007f0e793163a0+0x0000000000000414]
+J 2113 c1 jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (10 bytes) @ 0x00007f0e790bdeec [0x00007f0e790bdda0+0x000000000000014c]
+J 2026 c1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@14.0.1 (65 bytes) @ 0x00007f0e79077b84 [0x00007f0e79077800+0x0000000000000384]
+j  org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc()V+142
+j  org.apache.catalina.loader.WebappClassLoaderBase.clearReferences()V+67
+j  org.apache.catalina.loader.WebappClassLoaderBase.stop()V+8
+j  org.apache.catalina.loader.WebappLoader.stopInternal()V+63
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.StandardContext.stopInternal()V+363
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Void;+19
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Object;+1
+j  java.util.concurrent.FutureTask.run()V+39 java.base@14.0.1
+j  org.apache.tomcat.util.threads.InlineExecutorService.execute(Ljava/lang/Runnable;)V+38
+j  java.util.concurrent.AbstractExecutorService.submit(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;+20 java.base@14.0.1
+j  org.apache.catalina.core.ContainerBase.stopInternal()V+123
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Void;+19
+j  org.apache.catalina.core.ContainerBase$StopChild.call()Ljava/lang/Object;+1
+j  java.util.concurrent.FutureTask.run()V+39 java.base@14.0.1
+j  org.apache.tomcat.util.threads.InlineExecutorService.execute(Ljava/lang/Runnable;)V+38
+j  java.util.concurrent.AbstractExecutorService.submit(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future;+20 java.base@14.0.1
+j  org.apache.catalina.core.ContainerBase.stopInternal()V+123
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.StandardService.stopInternal()V+126
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.core.StandardServer.stopInternal()V+82
+j  org.apache.catalina.util.LifecycleBase.stop()V+214
+j  org.apache.catalina.startup.Tomcat.stop()V+9
+j  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stopTomcat()V+29
+j  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stop()V+32
+j  org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.stop()V+4
+j  org.springframework.context.SmartLifecycle.stop(Ljava/lang/Runnable;)V+1
+j  org.springframework.context.support.DefaultLifecycleProcessor.doStop(Ljava/util/Map;Ljava/lang/String;Ljava/util/concurrent/CountDownLatch;Ljava/util/Set;)V+174
+j  org.springframework.context.support.DefaultLifecycleProcessor.access$300(Lorg/springframework/context/support/DefaultLifecycleProcessor;Ljava/util/Map;Ljava/lang/String;Ljava/util/concurrent/CountDownLatch;Ljava/util/Set;)V+6
+j  org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.stop()V+176
+j  org.springframework.context.support.DefaultLifecycleProcessor.stopBeans()V+100
+j  org.springframework.context.support.DefaultLifecycleProcessor.onClose()V+1
+j  org.springframework.context.support.AbstractApplicationContext.doClose()V+111
+j  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose()V+15
+j  org.springframework.context.support.AbstractApplicationContext$1.run()V+14
+v  ~StubRoutines::call_stub
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x00007f0e8c1b0755
+
+Register to memory mapping:
+
+RAX=0x0000000000000008 is an unknown value
+RBX=0x0000000800000000 is pointing into metadata
+RCX=0x0000000050336c40 is an unknown value
+RDX=0x0000000800ac6218 is pointing into metadata
+RSP=0x00007f0e38cb5518 is pointing into the stack for thread: 0x00007f0e5c004800
+RBP=0x00007f0e38cb5520 is pointing into the stack for thread: 0x00007f0e5c004800
+RSI=0x0000000000000008 is an unknown value
+RDI=0x00007f0e8c1b074e is an unknown value
+R8 =0x00000008004f5e90 is pointing into metadata
+R9 =0x0000000800a9d1e4 is pointing into metadata
+R10=0x0000000000003e40 is an unknown value
+R11=0x0000000800ac6220 is pointing into metadata
+R12=0x0000000000000008 is an unknown value
+R13=0x00007f0e8c1b074e is an unknown value
+R14=0x00007f0e38cb55bc is pointing into the stack for thread: 0x00007f0e5c004800
+R15=0x0000000050336c40 is an unknown value
+
+
+Registers:
+RAX=0x0000000000000008, RBX=0x0000000800000000, RCX=0x0000000050336c40, RDX=0x0000000800ac6218
+RSP=0x00007f0e38cb5518, RBP=0x00007f0e38cb5520, RSI=0x0000000000000008, RDI=0x00007f0e8c1b074e
+R8 =0x00000008004f5e90, R9 =0x0000000800a9d1e4, R10=0x0000000000003e40, R11=0x0000000800ac6220
+R12=0x0000000000000008, R13=0x00007f0e8c1b074e, R14=0x00007f0e38cb55bc, R15=0x0000000050336c40
+RIP=0x00007f0e97613410, EFLAGS=0x0000000000010202, CSGSFS=0x002b000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f0e38cb5518)
+0x00007f0e38cb5518:   0000000050336c40 00007f0e38cb5560
+0x00007f0e38cb5528:   00007f0e97613840 0000000000000000
+0x00007f0e38cb5538:   0000000000000026 00007f0e977f11e8
+0x00007f0e38cb5548:   0000000000000028 00007f0e5c004800 
+
+Instructions: (pc=0x00007f0e97613410)
+0x00007f0e97613310:   01 4d 39 75 10 77 99 48 83 c4 08 5b 41 5c 41 5d
+0x00007f0e97613320:   41 5e 41 5f 5d c3 66 2e 0f 1f 84 00 00 00 00 00
+0x00007f0e97613330:   8b 0d 56 26 4d 00 45 31 c0 85 c9 0f 84 f7 00 00
+0x00007f0e97613340:   00 55 0f b6 05 dc 25 4d 00 89 d1 48 89 e5 53 84
+0x00007f0e97613350:   c0 74 35 85 f6 0f 8e 45 02 00 00 8d 46 ff 31 c9
+0x00007f0e97613360:   4c 8d 44 07 01 48 89 f8 0f 1f 84 00 00 00 00 00
+0x00007f0e97613370:   89 ca 48 83 c0 01 c1 e2 05 29 ca 89 d1 0f b6 50
+0x00007f0e97613380:   ff 01 d1 4c 39 c0 75 e8 89 c8 31 d2 4c 8b 0d fd
+0x00007f0e97613390:   25 4d 00 4c 8b 05 fe 25 4d 00 f7 35 e8 25 4d 00
+0x00007f0e976133a0:   48 63 d2 41 8b 04 91 4c 8d 14 95 00 00 00 00 89
+0x00007f0e976133b0:   c2 c1 e8 1e 81 e2 ff ff ff 3f 49 8d 14 90 83 f8
+0x00007f0e976133c0:   01 0f 84 49 01 00 00 43 8b 44 11 04 25 ff ff ff
+0x00007f0e976133d0:   3f 4d 8d 1c 80 4c 39 da 73 66 48 8b 1d 9f 25 4d
+0x00007f0e976133e0:   00 eb 0e 0f 1f 44 00 00 48 83 c2 08 49 39 d3 76
+0x00007f0e976133f0:   4f 3b 0a 75 f3 44 8b 42 04 49 01 d8 41 8b 00 c1
+0x00007f0e97613400:   e8 10 39 c6 75 e2 48 63 c6 eb 1a 0f 1f 44 00 00
+0x00007f0e97613410:   44 0f b6 54 07 ff 45 0f b6 4c 00 05 48 83 e8 01
+0x00007f0e97613420:   45 38 ca 75 c3 85 c0 7f e7 4d 85 c0 74 12 4c 89
+0x00007f0e97613430:   c0 5b 5d c3 0f 1f 40 00 4c 89 c0 c3 0f 1f 40 00
+0x00007f0e97613440:   48 8d 05 11 d8 4a 00 4c 8b 00 4d 85 c0 74 df 8b
+0x00007f0e97613450:   05 17 25 4d 00 45 31 c0 85 c0 74 d2 89 c8 31 d2
+0x00007f0e97613460:   4c 8b 15 09 25 4d 00 4c 8b 0d 0a 25 4d 00 f7 35
+0x00007f0e97613470:   f4 24 4d 00 48 63 d2 41 8b 04 92 4c 8d 1c 95 00
+0x00007f0e97613480:   00 00 00 89 c2 c1 e8 1e 81 e2 ff ff ff 3f 49 8d
+0x00007f0e97613490:   14 91 83 f8 01 0f 84 b7 00 00 00 43 8b 44 1a 04
+0x00007f0e976134a0:   25 ff ff ff 3f 4d 8d 1c 81 4c 39 da 73 80 48 8b
+0x00007f0e976134b0:   1d ab 24 4d 00 eb 16 66 0f 1f 84 00 00 00 00 00
+0x00007f0e976134c0:   48 83 c2 08 49 39 d3 0f 86 c3 00 00 00 3b 0a 75
+0x00007f0e976134d0:   ef 44 8b 42 04 49 01 d8 41 8b 00 c1 e8 10 39 c6
+0x00007f0e976134e0:   75 de 48 63 c6 eb 1e 66 0f 1f 84 00 00 00 00 00
+0x00007f0e976134f0:   44 0f b6 54 07 ff 45 0f b6 4c 00 05 48 83 e8 01
+0x00007f0e97613500:   45 38 ca 75 bb 85 c0 7f e7 e9 20 ff ff ff 66 90 
+
+
+Stack slot to memory mapping:
+stack at sp + 0 slots: 0x0000000050336c40 is an unknown value
+stack at sp + 1 slots: 0x00007f0e38cb5560 is pointing into the stack for thread: 0x00007f0e5c004800
+stack at sp + 2 slots: 0x00007f0e97613840: <offset 0x0000000000c6a840> in /opt/java/jdk-14.0.1/lib/server/libjvm.so at 0x00007f0e969a9000
+stack at sp + 3 slots: 0x0 is NULL
+stack at sp + 4 slots: 0x0000000000000026 is an unknown value
+stack at sp + 5 slots: 0x00007f0e977f11e8: <offset 0x0000000000e481e8> in /opt/java/jdk-14.0.1/lib/server/libjvm.so at 0x00007f0e969a9000
+stack at sp + 6 slots: 0x0000000000000028 is an unknown value
+stack at sp + 7 slots: 0x00007f0e5c004800 is a thread
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007f0e4000b0b0, length=31, elements={
+0x00007f0e900c9000, 0x00007f0e900ca800, 0x00007f0e900d2000, 0x00007f0e900d3800,
+0x00007f0e900d5800, 0x00007f0e900d7800, 0x00007f0e900d9800, 0x00007f0e90115800,
+0x00007f0e90119000, 0x00007f0e9011a800, 0x00007f0e90120000, 0x00007f0e90d70800,
+0x00007f0e90d72000, 0x00007f0e90d59800, 0x00007f0e90d8f000, 0x00007f0e910c5800,
+0x00007f0e910d2000, 0x00007f0e910d2800, 0x00007f0e910d4800, 0x00007f0e910d6000,
+0x00007f0e910d8800, 0x00007f0e910da800, 0x00007f0e910dc000, 0x00007f0e910de000,
+0x00007f0e910e0000, 0x00007f0e910e1800, 0x00007f0e910e8000, 0x00007f0e910eb000,
+0x00007f0e9002b800, 0x00007f0e4c203800, 0x00007f0e5c004800
+}
+
+Java Threads: ( => current thread )
+  0x00007f0e900c9000 JavaThread "Reference Handler" daemon [_thread_blocked, id=8165, stack(0x00007f0e695fd000,0x00007f0e696fe000)]
+  0x00007f0e900ca800 JavaThread "Finalizer" daemon [_thread_blocked, id=8166, stack(0x00007f0e694fc000,0x00007f0e695fd000)]
+  0x00007f0e900d2000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=8167, stack(0x00007f0e68e88000,0x00007f0e68f89000)]
+  0x00007f0e900d3800 JavaThread "Service Thread" daemon [_thread_blocked, id=8168, stack(0x00007f0e68d87000,0x00007f0e68e88000)]
+  0x00007f0e900d5800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=8169, stack(0x00007f0e68c86000,0x00007f0e68d87000)]
+  0x00007f0e900d7800 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=8170, stack(0x00007f0e68b85000,0x00007f0e68c86000)]
+  0x00007f0e900d9800 JavaThread "Sweeper thread" daemon [_thread_blocked, id=8171, stack(0x00007f0e68a84000,0x00007f0e68b85000)]
+  0x00007f0e90115800 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_native, id=8173, stack(0x00007f0e68983000,0x00007f0e68a84000)]
+  0x00007f0e90119000 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=8174, stack(0x00007f0e68882000,0x00007f0e68983000)]
+  0x00007f0e9011a800 JavaThread "Notification Thread" daemon [_thread_blocked

@@ -7,16 +7,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("login")
 public class LoginController {
@@ -44,9 +42,13 @@ public class LoginController {
                 resultMap.put("success", true);
                 resultMap.put("record", result);
                 resultMap.put("token", token);
+            } else {
+                resultMap.put("success",false);
+                resultMap.put("message","Username atau password salah");
             }
         } else {
             resultMap.put("success", false);
+            resultMap.put("message","no data");
         }
         return resultMap;
 
