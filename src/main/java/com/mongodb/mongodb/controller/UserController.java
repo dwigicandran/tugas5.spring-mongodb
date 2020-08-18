@@ -55,6 +55,11 @@ public class UserController {
             @RequestParam(defaultValue = "3") int size)
     { return userService.getAllUsername(search,page,size); }
 
+    @GetMapping("ById")
+    public Optional<User> getUserById(@RequestParam String id){
+        return userRepository.findById(id);
+    }
+
 
 
 }
