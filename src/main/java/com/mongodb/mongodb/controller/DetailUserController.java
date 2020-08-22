@@ -51,7 +51,7 @@ public class DetailUserController {
     }
 
     @GetMapping("/userid")
-    public DetailUser getDataByUserId(String id) {
+    public DetailUser getDataByUserId(@RequestParam String id) {
         return service.getByUserId(id);
     }
 
