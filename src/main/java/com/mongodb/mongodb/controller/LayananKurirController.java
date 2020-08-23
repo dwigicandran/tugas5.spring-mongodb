@@ -2,6 +2,7 @@ package com.mongodb.mongodb.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.mongodb.mongodb.model.LayananKurir;
 import com.mongodb.mongodb.repository.LayananKurirRepository;
@@ -49,6 +50,10 @@ public class LayananKurirController {
     @PutMapping("")
     Map <String,Object> updateLayananKurir(@RequestBody LayananKurir body){
         return service.updateLayananKurir(body);
+    }
+    @GetMapping("ById")
+    public Optional<LayananKurir> getlayananKurirById(@RequestParam String id){
+        return repo.findById(id);
     }
 
 }

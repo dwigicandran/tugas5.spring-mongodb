@@ -61,7 +61,7 @@ public class TransaksiService {
         return resultMap;
     }
 
-    public Transaksi getByTransaksiId(String search) {
-        return repo.findByTanggalContaining(search);
+    public Optional<Transaksi> getByTransaksiId(String id) {
+        return repo.findById(id);
     }
 }
